@@ -1,0 +1,56 @@
+# Laravel
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+.env
+.env.*
+/.env.backup
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Laravel specific cache files
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+
+# Ignore IDE/editor config files
+.idea
+*.sublime-project
+*.sublime-workspace
+.vscode/*
+nbproject
+/.project
+/.settings
+/.metadata
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and local files
+*.log
+*.swp
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*.swo
+
+# Composer files
+composer.lock
+composer.phar
+
+# NPM/Yarn files
+yarn.lock
+package-lock.json
+
+# PHPUnit
+.phpunit.result.cache
+
+# Docker
+docker-compose.override.yml

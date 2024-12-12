@@ -1,0 +1,315 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API TOD Partner Documentation",
+        "description": "This is the API documentation for the TOD Partner project.",
+        "contact": {
+            "email": "mboirick@cadorim.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User Here",
+                "description": "Login User Here",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "mauripay@cadorim.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "local_token": {
+                                            "type": "string",
+                                            "example": "token_string_here"
+                                        },
+                                        "expires_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-31T23:59:59Z"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "mauripay"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "mauripay@gmail.com"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation failed"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": "The email field is required."
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to authenticate locally. Invalid credentials."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/add/customer": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Create a customer",
+                "description": "Create a new customer with phone number, first name, last name, country, and password.",
+                "operationId": "customer",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "phoneNumber": {
+                                        "type": "string",
+                                        "example": "22248313834"
+                                    },
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "khaled"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "Bih"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "example": "MR"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "Password@123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Customer created successfully"
+                    },
+                    "400": {
+                        "description": "Validation failed"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/add/subscription": {
+            "post": {
+                "tags": [
+                    "Subscription"
+                ],
+                "summary": "Add a subscription",
+                "description": "Add a new subscription for a customer by account identifier and option ID.",
+                "operationId": "d030d885472718f14844943d1658b079",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "accountIdentifier": {
+                                        "type": "string",
+                                        "example": "+22248313834"
+                                    },
+                                    "optionId": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subscription added successfully"
+                    },
+                    "400": {
+                        "description": "Validation failed"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/cancel/subscription": {
+            "post": {
+                "tags": [
+                    "Subscription"
+                ],
+                "summary": "Cancel a subscription",
+                "description": "Cancel an existing subscription by account identifier and option ID.",
+                "operationId": "75705ef6bd11bcc1674d265dedf72c24",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "accountIdentifier": {
+                                        "type": "string",
+                                        "example": "+22248313834"
+                                    },
+                                    "optionId": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subscription canceled successfully"
+                    },
+                    "400": {
+                        "description": "Validation failed"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/get/subscription": {
+            "get": {
+                "tags": [
+                    "Subscription"
+                ],
+                "summary": "Get subscription by phone number",
+                "description": "Retrieve subscription details using a phone number.",
+                "operationId": "2a1227db441015154544d95debcc2266",
+                "parameters": [
+                    {
+                        "name": "phoneNumber",
+                        "in": "query",
+                        "description": "Phone number of the customer",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "+22223456789"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscription details retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Validation failed"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Customer",
+            "description": "Customer"
+        },
+        {
+            "name": "Subscription",
+            "description": "Subscription"
+        }
+    ]
+}
