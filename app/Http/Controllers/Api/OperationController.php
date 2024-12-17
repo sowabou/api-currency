@@ -23,7 +23,7 @@ class OperationController extends Controller
             'motif_voyage' => 'nullable|string|max:255',
             'num_billet' => 'nullable|numeric',
             'residence' => 'required|string|max:255',
-            'devise_code' => 'required|numeric',
+            'devise_code' => 'required|string',
             'nature' => 'required|string|max:50',
             'montant' => 'required|numeric',
             'cours' => 'required|numeric',
